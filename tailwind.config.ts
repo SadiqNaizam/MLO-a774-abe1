@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import defaultTheme from 'tailwindcss/defaultTheme';
 
 export default {
 	darkMode: ["class"],
@@ -52,6 +53,17 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+        // PRD specific colors accessible as Tailwind classes
+        'app-surface': 'hsl(var(--card))', // PRD: surface -> maps to card
+        'primary-text': 'hsl(var(--foreground))', // PRD: primaryText -> maps to foreground
+        'secondary-text': 'hsl(var(--muted-foreground))', // PRD: secondaryText -> maps to muted-foreground
+        'accent-orange': 'hsl(var(--accent))', // PRD: accentOrange -> maps to accent
+        'accent-blue': 'hsl(var(--primary))', // PRD: accentBlue -> maps to primary
+        'accent-green': 'hsl(var(--accent-green-hsl))', // PRD: accentGreen, uses custom CSS var
+        'accent-red': 'hsl(var(--destructive))', // PRD: accentRed -> maps to destructive
+        'app-border': 'hsl(var(--border))', // PRD: border -> maps to border
+
+        // Sidebar theme colors based on PRD
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
@@ -63,11 +75,21 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				}
 			},
+      fontFamily: {
+        sans: ['Nunito', ...defaultTheme.fontFamily.sans], // PRD: primaryFont
+      },
 			borderRadius: {
-				lg: 'var(--radius)',
-				md: 'calc(var(--radius) - 2px)',
-				sm: 'calc(var(--radius) - 4px)'
+        DEFAULT: 'var(--radius)', // 0.375rem (PRD default: "rounded-md")
+        md: 'var(--radius)',      // 0.375rem (maps to "rounded-md")
+				lg: '0.5rem',            // Standard larger radius (Tailwind's default lg)
+				sm: '0.25rem',           // Standard smaller radius (Tailwind's default sm or 'rounded')
+        button: '0.25rem',       // PRD buttons: "rounded" (0.25rem)
+        full: '9999px',          // PRD full: "rounded-full"
 			},
+      boxShadow: {
+        DEFAULT: '0 1px 2px 0 rgb(0 0 0 / 0.05)', // PRD default: "shadow-sm"
+        sm: '0 1px 2px 0 rgb(0 0 0 / 0.05)',      // Explicitly "shadow-sm"
+      },
 			keyframes: {
 				'accordion-down': {
 					from: {
